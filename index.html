@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akan Name Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>WANT TO KNOW YOUR AKAN NAME?</h1>
+        <p>Lets get right to it</p>
+    </header>
+    <section>
+        <p><strong>Just key in your day of birth and you will get your Akan name.</strong></p>
+    </section>
+    <section>
+        <form>
+            <div class="form">
+                <label for="day">Day of Birth</label>
+                <input type="number" id="day" placeholder="DD" min="1" max="31" required>
+            </div>
+            
+            <div class="form">
+                <label for="month">Month of Birth</label>
+                <input type="number" id="month" placeholder="MM" min="1" max="12" required>
+            </div>
+            
+            <div class="form">
+                <label for="year">Year of Birth</label>
+                <input type="number" id="year" placeholder="YYYY" min="0" required>
+            </div>
+            <div class="form">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <input type="radio" name="gender" value="male" id="male">
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" value="female" id="female">
+                    <label for="female">Female</label>
+                </div>
+            </div>
+            
+            <button type="submit" id="submit-button">Find My Name</button>
+            <button type="reset" id="clear-button">Clear Form</button>
+
+        </form>
+        <div id="result" class="hidden">
+            <h3>Your Akan Name is:</h3>
+            <p id="display-name"></p>
+        </div>
+    </section>
+
+
+    <script src="script.js" defer></script>
+</body>
+</html>
