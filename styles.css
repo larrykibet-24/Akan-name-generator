@@ -12,11 +12,10 @@ header {
   background-color: black;
   color: aliceblue;
   padding: 30px;
-  margin: 0px;
-  width: max-content;
 }
 #intro {
   text-align: center;
+  font-size: 100px;
 }
 #Akan-form {
   text-align: center;
