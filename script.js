@@ -1,6 +1,14 @@
-const maleNames = [ "Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"];
+const maleNames = [ "Sunday : Kwasi", "Monday : Kwadwo", "Tuesday : Kwabena", "Wednesday : Kwaku", "Thursday : Yaw", "Friday : Kofi", "Saturday : Kwame"];
 
-const femaleNames = ["Akosua", "Adwoa", "Abenaa", "Akua", "Yaa", "Afua", "Ama"];
+const femaleNames = [
+  "Sunday : Akosua",
+  "Monday : Adwoa",
+  "Tuesday : Abenaa",
+  "Wednesday : Akua",
+  "Thursday : Yaa",
+  "Friday : Afua",
+  "Saturday : Ama",
+];
 
 const submitButton = document.querySelector("#submit-button");
 
@@ -9,11 +17,11 @@ submitButton.addEventListener("click", (event) => {
   event.preventDefault();
 
   // Retrieve values from the form
-  const yearValue = parseInt(document.querySelector("#year").value);
+  const yearValue = (document.querySelector("#year").value);
   const CC = Math.floor(yearValue / 100);
   const YY = yearValue % 100;
-  const MM = parseInt(document.querySelector("#month").value);
-  const DD = parseInt(document.querySelector("#day").value);
+  const MM = (document.querySelector("#month").value);
+  const DD = (document.querySelector("#day").value);
 
   // Get the selected gender
   const gender = document.querySelector('input[name="gender"]:checked').value;  
@@ -26,8 +34,7 @@ submitButton.addEventListener("click", (event) => {
 
   // Calculate the day of the week index
   const dayIndex = Math.floor(
-    (CC / 4 - 2 * CC - 1 + (5 * YY) / 4 + (26 * (MM + 1)) / 10 + DD) % 7,
-  );
+    ((CC / 4 - 2) *( CC - 1) + ((5 * YY) / 4) + ((26 * (MM + 1)) / 10 )+ DD) % 7);
 
   // Ensure the index is positive
   const finalIndex = Math.abs(dayIndex);
