@@ -79,5 +79,7 @@ button:hover {
 }
 footer{
   text-align: center;
-  
+  background-color: black;
+  color: aliceblue;
+  padding: 15px;
 }
