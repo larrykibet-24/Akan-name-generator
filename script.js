@@ -24,6 +24,7 @@ submitButton.addEventListener("click", (event) => {
   const DD = (document.querySelector("#day").value);
 
   // Get the selected gender
+  // checked is the same as selected
   const gender = document.querySelector('input[name="gender"]:checked').value;  
 
   // Check if gender is selected
