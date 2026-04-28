@@ -2,6 +2,8 @@ Akan Name Generator
 Description
 The Akan Name Generator is a web application that calculates your Akan name based on your birthday and gender. Akan names are derived from Ghanaian culture, where children are traditionally given their first name based on the day of the week they were born.
 
+Live link : https://github.com/larrykibet-24/Akan-name-generator
+
 Author
 Larry Kibet
 
@@ -25,10 +27,8 @@ HTML
 CSS
 JavaScript
 Contact Information
-Facebook Linkedln
+Email: larry.kibet2@student.moringaschool.com
 
-License
-MIT License
 
 Copyright (c) 2025
 
