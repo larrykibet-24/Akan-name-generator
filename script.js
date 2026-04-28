@@ -28,15 +28,15 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   // Retrieve values from the form
-  const MM = parseInt(document.getElementById("month").value);
-  const DD = parseInt(document.getElementById("day").value);
+  const MM = (document.getElementById("month").value);
+  const DD = (document.getElementById("day").value);
   const yearValue = document.getElementById("year").value;
-  const CC = parseInt(yearValue.substring(0, 2));
-  const YY = parseInt(yearValue.substring(2, 4));
+  const CC = (yearValue.substring(0, 2));
+  const YY = (yearValue.substring(2, 4));
 
   // Get the selected gender
   // checked is the same as selected
-  const genderElement = document.querySelector('input[name="gender"]:checked').value;
+  const genderElement = document.querySelector('input[name="gender"]:checked')
 
   // Check if gender is selected
   if (!genderElement) {
