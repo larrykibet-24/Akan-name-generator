@@ -1,57 +1,84 @@
-const maleNames = [ "Sunday : Kwasi", "Monday : Kwadwo", "Tuesday : Kwabena", "Wednesday : Kwaku", "Thursday : Yaw", "Friday : Kofi", "Saturday : Kwame"];
+const maleNames = [ "Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"];
 
 const femaleNames = [
-  "Sunday : Akosua",
-  "Monday : Adwoa",
-  "Tuesday : Abenaa",
-  "Wednesday : Akua",
-  "Thursday : Yaa",
-  "Friday : Afua",
-  "Saturday : Ama",
+  "Akosua",
+  "Adwoa",
+  "Abenaa",
+  "Akua",
+  "Yaa",
+  "Afua",
+  "Ama",
+];
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 ];
 
-const submitButton = document.querySelector("#submit-button");
+const form = document.getElementById("Akan-form");
+const finalResult = document.getElementById("result");
+const display = document.getElementById("display-name");
 
-submitButton.addEventListener("click", (event) => {
+form.addEventListener("submit", (event) => {
   // Prevent form from refreshing page
   event.preventDefault();
 
   // Retrieve values from the form
-  const yearValue = (document.querySelector("#year").value);
-  const CC = Math.floor(yearValue / 100);
-  const YY = yearValue % 100;
-  const MM = (document.querySelector("#month").value);
-  const DD = (document.querySelector("#day").value);
+  const MM = parseInt(document.getElementById("month").value);
+  const DD = parseInt(document.getElementById("day").value);
+  const yearValue = document.getElementById("year").value;
+  const CC = parseInt(yearValue.substring(0, 2));
+  const YY = parseInt(yearValue.substring(2, 4));
 
   // Get the selected gender
   // checked is the same as selected
-  const gender = document.querySelector('input[name="gender"]:checked').value;  
+  const genderElement = document.querySelector('input[name="gender"]:checked').value;
 
   // Check if gender is selected
-  if (!gender) {
+  if (!genderElement) {
     alert("Please select your gender.");
     return;
   }
+  const gender = genderElement.value;
 
-  // Calculate the day of the week index
-  const dayIndex = Math.floor(
-    ((CC / 4 - 2) *( CC - 1) + ((5 * YY) / 4) + ((26 * (MM + 1)) / 10 )+ DD) % 7);
-
-  // Ensure the index is positive
-  const finalIndex = Math.abs(dayIndex);
-
-  // Pick the Akan name based on gender and day index
-  let akanName = "";
-  if (gender === "male") {
-    akanName = maleNames[finalIndex];
-  } else {
-    akanName = femaleNames[finalIndex];
+  // 3. Validation for Day and Month
+  if (DD <= 0 || DD > 31) {
+    alert("Please enter a valid day (1-31).");
+    return;
+  }
+  if (MM <= 0 || MM > 12) {
+    alert("Please enter a valid month (1-12).");
+    return;
   }
 
-  // Display the result
-  const resultDiv = document.getElementById("result");
-  const displayP = document.getElementById("display-name");
+  /** * 4. THE FORMULA
+   * Day of the week (d) = ( ( (CC/4) -2*CC-1) + ((5*YY/4) ) + ((26*(MM+1)/10)) + DD ) mod 7
+   * Note: We use Math.floor to simulate integer division.
+   */
+  let dayOfWeek =
+    (Math.floor(CC / 4) -2 * CC -1 +Math.floor((5 * YY) / 4) +Math.floor((26 * (MM + 1)) / 10) +DD) % 7;
 
-  displayP.textContent = akanName;
-  resultDiv.classList.remove("hidden");
+  // 5. Handle Negative Results from Modulo
+  // In JS, % can return negative. We add 7 to make it positive.
+  let i = Math.floor(dayOfWeek);
+  if (i < 0) {
+    i += 7;
+  }
+
+  // 6. Select Name
+  let akanName = gender === "male" ? maleNames[i] : femaleNames[i];
+  let dayName = days[i];
+
+  // 7. Output Result
+  display.innerHTML = `You were born on a <strong>${dayName}</strong>.<br>Your Akan name is <strong>${akanName}</strong>!`;
+  finalResult.classList.remove("hidden");
+});
+
+// Hide result when form is cleared
+form.addEventListener("reset", () => {
+  finalResult.classList.add("hidden");
 });
