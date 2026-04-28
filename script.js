@@ -13,8 +13,8 @@ submitButton.addEventListener("click", (event) =>){
     event.preventDefault();
 
     //retrieve values from the form
-    CC = 
-    YY = 
+    CC = document.querySelector(Math.floor("year" / 100))
+    YY =year % 100 
     MM = document.querySelector("month").value;
     DD = document.querySelector("day").value;
 
