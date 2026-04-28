@@ -15,6 +15,21 @@ header {
   color: aliceblue;
   padding: 30px;
 }
+#about {
+  text-align: center;
+  width: 90%;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.85); /* Slightly more solid for readability */
+  border-radius: 10px;
+  line-height: 1.6; /* Adds space between lines of text */
+}
+
+#about h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
 #intro {
   text-align: center;
   font-size: 24px;
