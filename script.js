@@ -43,18 +43,17 @@ submitButton.addEventListener("click", (event) => {
 
   // Calculate the day of the week index
   const dayIndex = Math.floor(
-    ((CC / 4 - 2) * (CC - 1) + ((5 * YY) / 4 )+ ((26 * (MM + 1)) / 10) + DD) % 7,
-  );
+    ((CC / 4 - 2 * CC - 1) + ((5 * YY) / 4 )+ ((26 * (MM + 1)) / 10) + DD) % 7,);
 
-  // Ensure the index is positive
-  const finalIndex = Math.abs(dayIndex);
+  // Ensures the index is positive
+  const i = Math.abs(dayIndex);
 
   // Pick the Akan name based on gender and day index
   let akanName = "";
   if (gender === "male") {
-    akanName = maleNames[finalIndex];
+    akanName = maleNames[i];
   } else {
-    akanName = femaleNames[finalIndex];
+    akanName = femaleNames[i];
   }
 
   // Display the result
