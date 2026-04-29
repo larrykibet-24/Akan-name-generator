@@ -1,78 +1,66 @@
-const akanform = document.getElementById("Akan-form")
-akanform.addEventListener("submit", function (event) {
-    // Prevent the form from refreshing the page
-    event.preventDefault();
+const maleNames = [
+  "Sunday : Kwasi",
+  "Monday : Kwadwo",
+  "Tuesday : Kwabena",
+  "Wednesday : Kwaku",
+  "Thursday : Yaw",
+  "Friday : Kofi",
+  "Saturday : Kwame",
+];
 
-    // Get the input values from form -_-
-    const dobInput = document.getElementById("birthdate").value;
-    const genderInput = document.querySelector('input[name="gender"]:checked');
+const femaleNames = [
+  "Sunday : Akosua",
+  "Monday : Adwoa",
+  "Tuesday : Abenaa",
+  "Wednesday : Akua",
+  "Thursday : Yaa",
+  "Friday : Afua",
+  "Saturday : Ama",
+];
 
-    // Validation: Check if gender is selected
-    if (!genderInput) {
-      alert("Please select your gender.");
-      return;
-    }
+const submitButton = document.querySelector("#submit-button");
 
-    const gender = genderInput.value;
-    const date = new Date(dobInput);
+submitButton.addEventListener("click", (event) => {
+  // Prevent form from refreshing page
+  event.preventDefault();
 
-    // Validate if the date is valid or not results to boolean
-    if (isNaN(date.getTime())) {
-      alert("Please enter a valid date.");
-      return;
-    }
+  // Retrieve values from the form
+  const yearValue = document.querySelector("#year").value;
+  const CC = Math.floor(yearValue / 100);
+  const YY = yearValue % 100;
+  const MM = document.querySelector("#month").value;
+  const DD = document.querySelector("#day").value;
 
-    // Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-    const dayOfWeek = date.getDay();
+  // Get the selected gender
+  // checked is the same as selected
+  const gender = document.querySelector('input[name="gender"]:checked').value;
 
-    // Data Arrays for male and female names
-    const maleNames = [
-      "Kwasi",
-      "Kwadwo",
-      "Kwabena",
-      "Kwaku",
-      "Yaw",
-      "Kofi",
-      "Kwame",
-    ];
-    const femaleNames = [
-      "Akosua",
-      "Adwoa",
-      "Abenaa",
-      "Akua",
-      "Yaa",
-      "Afua",
-      "Ama",
-    ];
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+  // Check if gender is selected
+  if (!gender) {
+    alert("Please select your gender.");
+    return;
+  }
 
-    // Determine the correct name using the if else condition
-    let akanName = "";
-    if (gender === "male") {
-      akanName = maleNames[dayOfWeek];
-    } else {
-      akanName = femaleNames[dayOfWeek];
-    }
+  // Calculate the day of the week index
+  const dayIndex = Math.floor(
+    ((CC / 4 - 2) * (CC - 1) + (5 * YY) / 4 + (26 * (MM + 1)) / 10 + DD) % 7,
+  );
 
-    // Display result
-    const finalResult = document.getElementById("result");
-    const displayPara = document.getElementById("display-name");
+  // Ensure the index is positive
+  const finalIndex = Math.abs(dayIndex);
 
-    displayPara.innerHTML = `You were born on a <strong>${days[dayOfWeek]}</strong>. <br> Your Akan name is <strong>${akanName}</strong>!`;
+  // Pick the Akan name based on gender and day index
+  let akanName = "";
+  if (gender === "male") {
+    akanName = maleNames[finalIndex];
+  } else {
+    akanName = femaleNames[finalIndex];
+  }
 
-    // Remove the 'hidden' class to show the result
-    finalResult.classList.remove("hidden");
-  });
+  // Display the result
+  const resultDiv = document.getElementById("result");
+  const displayP = document.getElementById("display-name");
 
-// Optional: Hide the result box again if the user clicks "Clear Form"
-document.getElementById("clear-button").addEventListener("click", function () {
-  document.getElementById("result").classList.add("hidden");
+  displayP.textContent = akanName;
+  resultDiv.classList.remove("hidden");
 });
