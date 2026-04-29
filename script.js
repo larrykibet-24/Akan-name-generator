@@ -35,6 +35,24 @@ submitButton.addEventListener("click", (event) => {
   // checked is the same as selected
   const gender = document.querySelector('input[name="gender"]:checked').value;
 
+  // Validate Month (Must be 1-12)
+  if (month < 1 || month > 12) {
+    alert("Month must be between 1 and 12.");
+    return;
+  }
+
+  // Validate Day (Must be 1-31)
+  if (day < 1 || day > 31) {
+    alert("Day must be between 1 and 31.");
+    return;
+  }
+
+  // Validate Year
+  if (year < 1000 || year > 4000) {
+    alert("Please enter a valid year");
+    return;
+  }
+
   // Check if gender is selected
   if (!gender) {
     alert("Please select your gender.");
@@ -43,7 +61,8 @@ submitButton.addEventListener("click", (event) => {
 
   // Calculate the day of the week index
   const dayIndex = Math.floor(
-    ((CC / 4 - 2 * CC - 1) + ((5 * YY) / 4 )+ ((26 * (MM + 1)) / 10) + DD) % 7,);
+    (CC / 4 - 2 * CC - 1 + (5 * YY) / 4 + (26 * (MM + 1)) / 10 + DD) % 7,
+  );
 
   // Ensures the index is positive
   const i = Math.abs(dayIndex);

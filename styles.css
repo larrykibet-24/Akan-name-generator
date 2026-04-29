@@ -81,10 +81,9 @@ button:hover {
   background-color: #e74c3c;
 }
 
-
 #result {
   margin: 30px auto;
-  width:80%;
+  width: 80%;
   max-width: 400px;
   padding: 20px;
   background: #e8f8f5;
@@ -94,7 +93,7 @@ button:hover {
 .hidden {
   display: none;
 }
-footer{
+footer {
   text-align: center;
   background-color: black;
   color: aliceblue;
