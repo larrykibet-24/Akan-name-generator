@@ -1,11 +1,10 @@
-document
-  .getElementById("Akan-form")
-  .addEventListener("submit", function (event) {
+document.getElementById("Akan-form")
+document.addEventListener("submit", function (event) {
     // 1. Prevent the form from refreshing the page
     event.preventDefault();
 
     // 2. Get the input values
-    const birthdateInput = document.getElementById("birthdate").value;
+    const dobInput = document.getElementById("birthdate").value;
     const genderInput = document.querySelector('input[name="gender"]:checked');
 
     // 3. Validation: Check if gender is selected
@@ -15,7 +14,7 @@ document
     }
 
     const gender = genderInput.value;
-    const date = new Date(birthdateInput);
+    const date = new Date(dobInput);
 
     // 4. Validate if the date is valid
     if (isNaN(date.getTime())) {
@@ -64,13 +63,13 @@ document
     }
 
     // 8. Display the result
-    const resultDiv = document.getElementById("result");
+    const finalResult = document.getElementById("result");
     const displayPara = document.getElementById("display-name");
 
     displayPara.innerHTML = `You were born on a <strong>${days[dayOfWeek]}</strong>. <br> Your Akan name is <strong>${akanName}</strong>!`;
 
     // Remove the 'hidden' class to show the result
-    resultDiv.classList.remove("hidden");
+    finalResult.classList.remove("hidden");
   });
 
 // Optional: Hide the result box again if the user clicks "Clear Form"
