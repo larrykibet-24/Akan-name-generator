@@ -1,5 +1,5 @@
-document.getElementById("Akan-form")
-document.addEventListener("submit", function (event) {
+const akanform = document.getElementById("Akan-form")
+akanform.addEventListener("submit", function (event) {
     // 1. Prevent the form from refreshing the page
     event.preventDefault();
 
