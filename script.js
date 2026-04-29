@@ -1,23 +1,8 @@
 const maleNames = [ "Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"];
 
-const femaleNames = [
-  "Akosua",
-  "Adwoa",
-  "Abenaa",
-  "Akua",
-  "Yaa",
-  "Afua",
-  "Ama",
-];
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+const femaleNames = ["Akosua", "Adwoa", "Abenaa", "Akua", "Yaa", "Afua", "Ama"];
+
+const days = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 const form = document.getElementById("Akan-form");
 const finalResult = document.getElementById("result");
@@ -60,6 +45,7 @@ form.addEventListener("submit", (event) => {
    * Note: We use Math.floor to simulate integer division.
    */
   let dayOfWeek =
+  // Zeller’s Congruence
     (Math.floor(CC / 4) -2 * CC -1 +Math.floor((5 * YY) / 4) +Math.floor((26 * (MM + 1)) / 10) +DD) % 7;
 
   // 5. Handle Negative Results from Modulo
