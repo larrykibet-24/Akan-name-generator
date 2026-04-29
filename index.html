@@ -34,39 +34,22 @@
         <!-- Akan fill-in form to get your name -->
         <form id="Akan-form">
             <div class="form">
-                <!-- Input the day date -->
-                <label for="day">Day of Birth</label>
-                <!-- type is set to only accept numbers ,placeholder is set as DD , only numbers from 1 to 31 , required ensures that numbers must be input -->
-                <input type="number" id="day" placeholder="DD" min="1" max="31" required>
+                <label for="birthdate">Date of Birth</label>
+                <input type="date" id="birthdate" required>
             </div>
-
+        
             <div class="form">
-                <!-- inout month date -->
-                <label for="month">Month of Birth</label>
-                <input type="number" id="month" placeholder="MM" min="1" max="12" required>
-            </div>
-
-            <div class="form">
-                <!-- inpt year date -->
-                <label for="year">Year of Birth</label>
-                <input type="number" id="year" placeholder="YYYY" min="1000" max="4000" required>
-            </div>
-            <div class="form">
-                <!-- input gender either male or female. Only one can be chosen this is possible due to the similar name element (name="gender") -->
                 <label>Gender</label>
                 <div class="Gender">
-                    <!-- radio is the type of 'list';the interactive part -->
                     <input type="radio" name="gender" value="male" id="male">
                     <label for="male">Male</label>
                     <input type="radio" name="gender" value="female" id="female">
                     <label for="female">Female</label>
                 </div>
             </div>
-            <!-- starts the process of finding your name -->
+        
             <button type="submit" id="submit-button">Find My Name</button>
-            <!-- clears all written text -->
             <button type="reset" id="clear-button">Clear Form</button>
-
         </form>
         <!-- This will be hidden until all requirements are satisfied and the 'Find My Name' button is clicked -->
         <div id="result" class="hidden">

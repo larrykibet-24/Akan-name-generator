@@ -1,70 +1,79 @@
-const maleNames = [ "Kwasi", "Kwadwo", "Kwabena", "Kwaku", "Yaw", "Kofi", "Kwame"];
+document
+  .getElementById("Akan-form")
+  .addEventListener("submit", function (event) {
+    // 1. Prevent the form from refreshing the page
+    event.preventDefault();
 
-const femaleNames = ["Akosua", "Adwoa", "Abenaa", "Akua", "Yaa", "Afua", "Ama"];
+    // 2. Get the input values
+    const birthdateInput = document.getElementById("birthdate").value;
+    const genderInput = document.querySelector('input[name="gender"]:checked');
 
-const days = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    // 3. Validation: Check if gender is selected
+    if (!genderInput) {
+      alert("Please select your gender.");
+      return;
+    }
 
-const form = document.getElementById("Akan-form");
-const finalResult = document.getElementById("result");
-const display = document.getElementById("display-name");
+    const gender = genderInput.value;
+    const date = new Date(birthdateInput);
 
-form.addEventListener("submit", (event) => {
-  // Prevent form from refreshing page
-  event.preventDefault();
+    // 4. Validate if the date is valid
+    if (isNaN(date.getTime())) {
+      alert("Please enter a valid date.");
+      return;
+    }
 
-  // Retrieve values from the form
-  const MM = (document.getElementById("month").value);
-  const DD = (document.getElementById("day").value);
-  const yearValue = document.getElementById("year").value;
-  const CC = (yearValue.substring(0, 2));
-  const YY = (yearValue.substring(2, 4));
+    // 5. Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const dayOfWeek = date.getDay();
 
-  // Get the selected gender
-  // checked is the same as selected
-  const genderElement = document.querySelector('input[name="gender"]:checked')
+    // 6. Data Arrays for names
+    const maleNames = [
+      "Kwasi",
+      "Kwadwo",
+      "Kwabena",
+      "Kwaku",
+      "Yaw",
+      "Kofi",
+      "Kwame",
+    ];
+    const femaleNames = [
+      "Akosua",
+      "Adwoa",
+      "Abenaa",
+      "Akua",
+      "Yaa",
+      "Afua",
+      "Ama",
+    ];
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
 
-  // Check if gender is selected
-  if (!genderElement) {
-    alert("Please select your gender.");
-    return;
-  }
-  const gender = genderElement.value;
+    // 7. Determine the correct name
+    let akanName = "";
+    if (gender === "male") {
+      akanName = maleNames[dayOfWeek];
+    } else {
+      akanName = femaleNames[dayOfWeek];
+    }
 
-  // 3. Validation for Day and Month
-  if (DD <= 0 || DD > 31) {
-    alert("Please enter a valid day (1-31).");
-    return;
-  }
-  if (MM <= 0 || MM > 12) {
-    alert("Please enter a valid month (1-12).");
-    return;
-  }
+    // 8. Display the result
+    const resultDiv = document.getElementById("result");
+    const displayPara = document.getElementById("display-name");
 
-  /** * 4. THE FORMULA
-   * Day of the week (d) = ( ( (CC/4) -2*CC-1) + ((5*YY/4) ) + ((26*(MM+1)/10)) + DD ) mod 7
-   * Note: We use Math.floor to simulate integer division.
-   */
-  let dayOfWeek =
-  // Zeller’s Congruence
-    (Math.floor(CC / 4) -2 * CC -1 +Math.floor((5 * YY) / 4) +Math.floor((26 * (MM + 1)) / 10) +DD) % 7;
+    displayPara.innerHTML = `You were born on a <strong>${days[dayOfWeek]}</strong>. <br> Your Akan name is <strong>${akanName}</strong>!`;
 
-  // 5. Handle Negative Results from Modulo
-  // In JS, % can return negative. We add 7 to make it positive.
-  let i = Math.floor(dayOfWeek);
-  if (i < 0) {
-    i += 7;
-  }
+    // Remove the 'hidden' class to show the result
+    resultDiv.classList.remove("hidden");
+  });
 
-  // 6. Select Name
-  let akanName = gender === "male" ? maleNames[i] : femaleNames[i];
-  let dayName = days[i];
-
-  // 7. Output Result
-  display.innerHTML = `You were born on a <strong>${dayName}</strong>.<br>Your Akan name is <strong>${akanName}</strong>!`;
-  finalResult.classList.remove("hidden");
-});
-
-// Hide result when form is cleared
-form.addEventListener("reset", () => {
-  finalResult.classList.add("hidden");
+// Optional: Hide the result box again if the user clicks "Clear Form"
+document.getElementById("clear-button").addEventListener("click", function () {
+  document.getElementById("result").classList.add("hidden");
 });
